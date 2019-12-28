@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import copy
+import sys
 
 OP_ADD = 1
 OP_MUL = 2
@@ -25,6 +26,9 @@ def check(opcodes):
         index += 4
     return opcodes
 
+class FoundSolutionException(Exception):
+    pass
+
 def main():
     import argparse
     parser = argparse.ArgumentParser()
@@ -34,11 +38,22 @@ def main():
     with open(ns.puzzle_input_file) as f:
         opline = f.readline()
         opcodes = [int(op) for op in opline.split(",")]
-    opcodes[1] = 12
-    opcodes[2] = 2
 
-    outcodes = check(copy.copy(opcodes))
-    print(f"Output: {outcodes[0]}")
+    try:
+        for verb in range(100):
+            for noun in range(100):
+                opcodes[1] = noun
+                opcodes[2] = verb
+                outcodes = check(copy.copy(opcodes))
+                output = outcodes[0]
+                if output == 19690720:
+                    raise FoundSolutionException()
+    except FoundSolutionException:
+        print(f"Found a solution for verb={verb} and noun={noun}")
+    else:
+        print("Program failed to find a solution")
+        sys.exit(-1)
+    print(f"Output: 100 * noun + verb = {100 * noun + verb}")
 
 if __name__=="__main__":
     main()
