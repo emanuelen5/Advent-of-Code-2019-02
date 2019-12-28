@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import copy
 
 OP_ADD = 1
 OP_MUL = 2
@@ -33,10 +34,11 @@ def main():
     with open(ns.puzzle_input_file) as f:
         opline = f.readline()
         opcodes = [int(op) for op in opline.split(",")]
+    opcodes[1] = 12
+    opcodes[2] = 2
 
-    outcodes = check(opcodes)
-    new_codes = ",".join([str(c) for c in outcodes])
-    print(f"New codes: {new_codes}")
+    outcodes = check(copy.copy(opcodes))
+    print(f"Output: {outcodes[0]}")
 
 if __name__=="__main__":
     main()
