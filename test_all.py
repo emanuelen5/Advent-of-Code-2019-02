@@ -1,7 +1,7 @@
 from main import check
 import unittest
 
-class TestAOC2019_04(unittest.TestCase):
+class TestAOC(unittest.TestCase):
     def test_examples(self):
         self.assertEqual([99], check([99]))
         self.assertEqual([1, 2, 0, 1, 99], check([1, 0, 0, 1, 99]))
