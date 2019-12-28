@@ -35,7 +35,8 @@ def main():
         opcodes = [int(op) for op in opline.split(",")]
 
     outcodes = check(opcodes)
-    print(f"New codes: {outcodes.join(',')}")
+    new_codes = ",".join([str(c) for c in outcodes])
+    print(f"New codes: {new_codes}")
 
 if __name__=="__main__":
     main()
